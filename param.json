@@ -1,0 +1,38 @@
+
+{
+"param":   {"lr":0.01},
+
+"conv_net":{
+			"//": "120x200->120x200x32->60*100*64->30*50*128->15*25*128->15*25*1",
+			"name":"img_encoder_conv",
+             		"layers":["cn1","cn2","cn3","cn4","cn5"],
+             		"outs":[32,64,128,128,1],
+             		"bn":[false,false,false,false,false],
+             		"kenel":[[3,3],[4,4],[4,4],[4,4],[1,1]],
+             		"stride":[[1,1],[2,2],[2,2],[2,2],[1,1]],
+    	     		"padding":["same","same","same","same","valid"],
+             		"activation":["relu","relu","relu","relu","relu"]
+   			},
+
+"fully_con":{
+			"//":"15*25*1->375 ->...-> 64",
+			"name":"img_encoder_full",
+    		        "layers":["fc1","fc2","fc3","fc4","fc5"],
+             		"outs":[512,512,256,256,64],
+			"bn":[false,false,false,false,false],
+			"activation":["relu","relu","relu","relu","none"]
+			},
+
+"fully_dec":{
+			"//":"64 ->...-> 2048*3",
+			"name":"decoder",
+             		"layers":["fc1","fc2","fc3","fc4"],
+             		"outs":[512,2048,2048,6144],
+             		"bn":[false,false,false,false],
+             		"activation":["relu","relu","relu","none"]
+   			}
+}
+
+   
+
+
